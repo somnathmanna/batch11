@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  tasks:
+  - name: start docker service
+    service:
+      name: docker
+      state: started
+      enabled: true
+  - name: deploy test application
+    command: docker run -it -d -p 8888:8888 somnathmanna/batch10:1.0
+  handlers:
+  - name: run update
+    apt:
+      update_cache: yes
